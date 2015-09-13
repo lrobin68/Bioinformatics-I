@@ -1,0 +1,102 @@
+### Exploration
+1. What is the dimension of xyz as a data.frame or a matrix? 
+
+```{r}
+# from the notes I can see that both matrices and data frames generate two dimensional vectors of xyz
+# I will use an example to demonstrate this 
+x <-c(runif(10,0,10))
+y <-c(runif(10,2,10))
+z <-c(runif(10,0,5))
+# into a matrix
+xyz <-cbind(x,y,z) 
+dim(xyz) # not totally clear on what dim is accomplishing - 
+#into a data frame
+df.xyz <-as.data.frame(xyz)
+#and observe the structure - does observing the structure reveal the dimension of xyz? 
+str(df.xyz)
+```
+2. Can you tell the difference between the rnorm and runif outputs for n=3, n=10, n=100?
+
+```{r}
+# runif for n =3
+
+x <-c(runif(3,0,10))
+y <-c(runif(3,0,10))
+z <-c(runif(3,0,10))
+# first run a boxplot knowing that we can probably tell more from a stripchart (follow up with stripchart)
+boxplot(x,y,z)
+stripchart(list(x,y,z), vertical=TRUE, method ="jitter", jitter=0.2) 
+mean (x) #find the mean of x, which will be the same as y and z, in order to have the mean for entering an n=3 rnorm function
+sd (x) #find the standard deviation of x, which will be the same as y and z in this data set, in order to have the sd for "
+#mean = 4.234018
+#sd = 2.272179
+#I don't know if determining these numbers is necessary in order to create an rnorm output that is comparable to the runif output but I think that in order to have the fewest differences between these data sets and therefore create the best comparison, it may be necessary
+summary(x)
+
+#rnorm for n = 3
+
+xn<-rnorm(3,4.234018,2.272179)
+yn<-rnorm(3,4.234018,2.272179)
+zn<-rnorm(3,4.234018,2.272179)
+boxplot(x,y,z)
+stripchart(list(x,y,z), vertical=TRUE, method="jitter", jitter=0.2)
+summary(xn)
+
+#runif for n=10
+
+x <-c(runif(10,0,10))
+y <-c(runif(10,0,10))
+z <-c(runif(10,0,10))
+boxplot(x,y,z)
+stripchart(list(x,y,z), vertical=TRUE, method ="jitter", jitter=0.2)
+mean(x) #when run, mean(x) = 5.299475
+sd(x) #when run, sd(x) = 2.13241
+summary(x)
+
+#rnorm for n=10
+
+xn<-rnorm(10,5.299475,2.13241)
+yn<-rnorm(10,5.299475,2.13241)
+zn<-rnorm(10,5.2994755,2.13241)
+boxplot(x,y,z)
+stripchart(list(x,y,z), vertical=TRUE, method="jitter", jitter=0.2)
+summary(xn)
+
+#runif for n=100
+
+x <-c(runif(100,0,10))
+y <-c(runif(100,0,10))
+z <-c(runif(100,0,10))
+boxplot(x,y,z)
+stripchart(list(x,y,z), vertical=TRUE, method ="jitter", jitter=0.2)
+mean(x) # when run, mean(x)= 4.85773
+sd(x) # when run, sd(x) = 2.85903
+summary(x)
+
+#rnorm for n=100
+
+xn<-rnorm(100,4.85773,2.85903)
+yn<-rnorm(100,4.85773,2.85903)
+zn<-rnorm(100,4.85773,2.85903)
+boxplot(x,y,z)
+stripchart(list(x,y,z), vertical=TRUE, method="jitter", jitter=0.2)
+summary(xn)
+
+# to answer the question posed, when I look at both the boxplots and stripcharts produced from corresponding rnorm and runif outputs, I see no visible difference between the two plots (though this is not to say that there isn't one or several differences between them)
+# if I look at the summaries for x and corresponding xns, this is when differences are highlighted
+# for all normal outputs, the max and min are further away from the median,  making the whiskers on the boxplot longer 
+```
+
+3. What is the difference between these three subset forms?
+
+1. df.xyz$z[1:5]
+2. df.xyz[1:5.3]
+3. xyz[1:5,"z"]
+
+Answers
+
+1. This is a subset from a data frame of xyz output. Here, we are taking the first 5 rows of the column called "z", which would be the third column. This is possibile in a data frame only.
+2. This subset is also from a data frame of xyz output, and is identical to the subset taken in the first example, simply expressed using the numerical value of the 'z' column as opposed to listing it by name
+3. This subset is being taken from a vector only, not a data frame, and therefore we must indicate the name of the column within the brackets, using a set of quotation marks. 
+
+ 
